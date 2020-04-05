@@ -6,48 +6,41 @@
 
 import React, { Component } from 'react';
 import {
-  AppRegistry,
-  StyleSheet,
-  Text,
-  View
+  AppRegistry
 } from 'react-native';
+
+import { Navigator } from 'react-native-deprecated-custom-components';
+
+import MainScene from './src/components/main_scene';
+import CustomerScene from './src/components/customer_scene';
+import ContactScene from './src/components/contact_scene';
+import CompanyScene from './src/components/company_scene';
+import ServiceScene from './src/components/service_scene';
 
 export default class InstitutionalApp extends Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.android.js
-        </Text>
-        <Text style={styles.instructions}>
-          Double tap R on your keyboard to reload,{'\n'}
-          Shake or press menu button for dev menu
-        </Text>
-      </View>
+      <Navigator
+      initialRoute={{ id: 'main' }}
+      renderScene={(route, navigator) => {
+        switch (route.id) {
+          case 'main':
+            return (<MainScene navigator={navigator} />);
+          case 'customer':
+            return (<CustomerScene navigator={navigator} />);
+          case 'contact':
+            return (<ContactScene navigator={navigator} />);
+          case 'company':
+            return (<CompanyScene navigator={navigator} />);
+          case 'service':
+            return (<ServiceScene navigator={navigator} />);
+          default:
+            return false;
+        }
+      }}
+      />
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});
 
 AppRegistry.registerComponent('InstitutionalApp', () => InstitutionalApp);
